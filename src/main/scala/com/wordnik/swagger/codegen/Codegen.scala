@@ -229,6 +229,8 @@ class Codegen(config: CodegenConfig) {
         val params = new HashMap[String, AnyRef]
         params += "code" -> param.code.toString()
         params += "reason" -> param.message
+ 		 if (!param.responseModel.isEmpty) 
+ 		     params += "responseModel" -> param.responseModel
         params += "hasMore" -> "true"
         errorList += params	 
       })

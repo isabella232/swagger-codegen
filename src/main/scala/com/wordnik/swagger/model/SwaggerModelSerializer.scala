@@ -226,12 +226,14 @@ object SwaggerSerializers {
         (json \ "message").extractOrElse({
           !!(json, ERROR, "reason", "missing required field", ERROR)
           ""
-        })
+        }),
+        (json \ "responseModel").extractOpt[String]
       )
     }, {
       case x: ResponseMessage =>
       ("code" -> x.code) ~
-      ("message" -> x.message)
+      ("message" -> x.message) ~
+      ("responseModel" -> x.responseModel)
     }
   ))
 
