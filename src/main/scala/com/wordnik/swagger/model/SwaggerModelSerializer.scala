@@ -218,6 +218,18 @@ object SwaggerSerializers {
 
   class ResponseMessageSerializer extends CustomSerializer[ResponseMessage](implicit formats => ({
     case json =>
+      val responseClass = (json \ "responseModel") match {
+        case e: JObject => {
+          val inner = {
+            (e \ "items" \"type").extractOrElse({
+              (e \ "items" \ "$ref").extract[String]
+            })
+          }
+          Option("%s[%s]".format((e \ "type").extract[String], inner))
+        }
+        case _ => (json \ "responseModel").extractOpt[String]
+      }
+    
       ResponseMessage(
         (json \ "code").extractOrElse({
           !!(json, ERROR, "code", "missing required field", ERROR)
@@ -227,7 +239,7 @@ object SwaggerSerializers {
           !!(json, ERROR, "reason", "missing required field", ERROR)
           ""
         }),
-        (json \ "responseModel").extractOpt[String]
+        responseClass
       )
     }, {
       case x: ResponseMessage =>
