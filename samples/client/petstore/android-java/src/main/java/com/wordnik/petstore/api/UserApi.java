@@ -118,6 +118,8 @@ public class UserApi {
       }
     }
   }
+  //error info- code: 400 reason: "Invalid username supplied" model: <none>
+  //error info- code: 404 reason: "User not found" model: <none>
   public void updateUser (String username, User body) throws ApiException {
     // verify required params are set
     if(username == null || body == null ) {
@@ -149,6 +151,8 @@ public class UserApi {
       }
     }
   }
+  //error info- code: 400 reason: "Invalid username supplied" model: <none>
+  //error info- code: 404 reason: "User not found" model: <none>
   public void deleteUser (String username) throws ApiException {
     // verify required params are set
     if(username == null ) {
@@ -180,6 +184,8 @@ public class UserApi {
       }
     }
   }
+  //error info- code: 400 reason: "Invalid username supplied" model: <none>
+  //error info- code: 404 reason: "User not found" model: <none>
   public User getUserByName (String username) throws ApiException {
     // verify required params are set
     if(username == null ) {
@@ -211,6 +217,7 @@ public class UserApi {
       }
     }
   }
+  //error info- code: 400 reason: "Invalid username and password combination" model: <none>
   public String loginUser (String username, String password) throws ApiException {
     // verify required params are set
     if(username == null || password == null ) {
